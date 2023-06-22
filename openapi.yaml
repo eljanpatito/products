@@ -9,21 +9,21 @@ info:
   license:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
-  version: 1.0.0
+  version: 2.0.0
 security:
   - JWT: []
 tags:
 - name: Products
   description: "This is a products tags description"
 paths:
-  /product-api/rest/application/status:
+  /v2/product-api/rest/application/status:
     get:
       tags:
       - Products
       responses:
         "200":
           description: OK
-  /product-api/rest/categories:
+  /v2/product-api/rest/categories:
     get:
       tags:
         - Categories
@@ -64,7 +64,7 @@ paths:
           description: "invalid query, a parameter is missing or incorrect"
         "404":
           description: categories not found
-  /product-api/rest/categories/defects:
+  /v2/product-api/rest/categories/defects:
     get:
       tags:
         - Categories
