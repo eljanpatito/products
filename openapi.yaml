@@ -1,0 +1,101 @@
+---
+openapi: 3.0.3
+info:
+  title: Mojix ytem Products
+  contact:
+    name: "Mojix, Inc."
+    url: https://mojix.com
+    email: support@mojix.com
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.0
+security:
+  - JWT: []
+tags:
+- name: Products
+  description: "This is a products tags description"
+paths:
+  /product-api/rest/application/status:
+    get:
+      tags:
+      - Products
+      responses:
+        "200":
+          description: OK
+  /product-api/rest/categories:
+    get:
+      tags:
+        - Categories
+      summary: Retrieve all the categories
+      parameters:
+      - name: Accept-version
+        in: query
+        description: "Used for pagination, define the offset from the first result\
+          \ you want to retrieve"
+        required: true
+        schema:
+          enum:
+          - v1
+          - v2
+          - v3.0
+      - name: show_level
+        in: query
+        schema:
+          default: "false"
+          type: boolean
+      - name: size
+        in: query
+        description: configure the maximum amount of products to be returned. Can
+          be superseded by the system limit if too large
+        schema:
+          format: int32
+          type: integer
+      - name: Accept-version
+        in: header
+        schema:
+          type: string
+      responses:
+        "200":
+          description: successful response
+        "206":
+          description: Partial response
+        "400":
+          description: "invalid query, a parameter is missing or incorrect"
+        "404":
+          description: categories not found
+  /product-api/rest/categories/defects:
+    get:
+      tags:
+        - Categories
+      summary: Get All Defects
+      parameters:
+      - name: from
+        in: query
+        description: "used for pagination, define the offset from the first result\
+          \ you want to retrieve"
+        schema:
+          format: int32
+          type: integer
+      - name: size
+        in: query
+        description: configure the maximum amount of defects to be returned. Can be
+          superseded by the system limit if too large
+        schema:
+          format: int32
+          type: integer
+      responses:
+        "200":
+          description: Successful response
+        "206":
+          description: Partial response
+        "400":
+          description: "Invalid query, a parameter is missing or incorrect"
+        "404":
+          description: Defect not found
+components:
+  securitySchemes:
+    JWT:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
